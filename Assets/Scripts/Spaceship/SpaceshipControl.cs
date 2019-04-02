@@ -7,20 +7,23 @@ public class SpaceshipControl : MonoBehaviour
 {
     public Rigidbody rigidbody;
 
-    public float speed = 100.0f;
+    public float maxSpeed = 5.0f;
+    public float acceleration = 0.00001f;
     [SerializeField]
     private bool canJump = false;
+    private Vector3 originPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         Assert.IsNotNull(rigidbody, "[SpaceshipControl]: Spaceship rigidbody is null");
+        originPosition = rigidbody.position;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        rigidbody.velocity = rigidbody.transform.forward * speed;
+        rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity + transform.forward * acceleration, maxSpeed);
     }
 }
