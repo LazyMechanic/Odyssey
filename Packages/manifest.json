@@ -1,14 +1,17 @@
 {
   "dependencies": {
+    "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git#7e65a2a8a2982e84ee40bd19847f72beb3a32533",
+    "com.leopotam.ecs-ui": "https://github.com/Leopotam/ecs-ui.git#85573ce4a539d12160f325c450a294a5d94ae048",
+    "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git#73583428dfd46423371de700a5fa09712462f245",
     "com.unity.ads": "2.0.8",
-    "com.unity.analytics": "3.2.2",
-    "com.unity.collab-proxy": "1.2.15",
-    "com.unity.entities": "0.0.12-preview.24",
-    "com.unity.jobs": "0.0.7-preview.6",
-    "com.unity.package-manager-ui": "2.0.7",
-    "com.unity.purchasing": "2.0.3",
-    "com.unity.rendering.hybrid": "0.0.1-preview.4",
-    "com.unity.textmeshpro": "1.3.0",
+    "com.unity.analytics": "3.3.2",
+    "com.unity.collab-proxy": "1.2.16",
+    "com.unity.package-manager-ui": "2.1.2",
+    "com.unity.purchasing": "2.0.6",
+    "com.unity.textmeshpro": "2.0.0",
+    "com.unity.timeline": "1.0.0",
+    "com.unity.xr.oculus.standalone": "1.29.1",
+    "com.unity.xr.openvr.standalone": "1.0.5",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -39,5 +42,19 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.leopotam.ecs": {
+      "hash": "7e65a2a8a2982e84ee40bd19847f72beb3a32533",
+      "revision": "7e65a2a8a2982e84ee40bd19847f72beb3a32533"
+    },
+    "com.leopotam.ecs-ui": {
+      "hash": "85573ce4a539d12160f325c450a294a5d94ae048",
+      "revision": "85573ce4a539d12160f325c450a294a5d94ae048"
+    },
+    "com.leopotam.ecs-unityintegration": {
+      "hash": "73583428dfd46423371de700a5fa09712462f245",
+      "revision": "73583428dfd46423371de700a5fa09712462f245"
+    }
   }
 }
