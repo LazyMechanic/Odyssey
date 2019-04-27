@@ -2,7 +2,8 @@ using Leopotam.Ecs;
 using Odyssey;
 using UnityEngine;
 
-namespace Client {
+namespace Odyssey
+{
     sealed class Bootstrap : MonoBehaviour {
         private EcsWorld _world;
         private EcsSystems _initSystems;
@@ -24,13 +25,17 @@ namespace Client {
 
             _updateSystems
                 .Add(new AxisSystem())
+                .Add(new BarrierAreaForwardSpawnSystem())
+                .Add(new BarrierAreaSideSpawnSystem())
+                .Add(new BarrierAreaSpawnSystem())
+                .Add(new BarrierPatternGenerateSystem())
                 .Initialize();
 
             _fixedUpdateSystems
+                .Add(new BeatshipAltitudeSystem())
                 .Add(new PidSystem())
                 .Add(new AntiGravitySystem())
                 .Add(new AntiGravityApplySystem())
-                .Add(new BeatshipAltitudeSystem())
                 .Add(new BeatshipMovementSystem())
                 .Add(new PositionRecoverySystem())
                 .Initialize();
@@ -42,6 +47,7 @@ namespace Client {
                 .Add(new BeatshipSpawnInitSystem())
                 .Add(new BeatshipInitSystem())
                 .Add(new PlayerInitSystem())
+                .Add(new BarrierAreaContainerInitSystem())
                 .Initialize();
         }
 

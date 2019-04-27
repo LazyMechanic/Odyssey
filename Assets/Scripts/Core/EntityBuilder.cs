@@ -10,7 +10,7 @@ namespace Odyssey
             private set;
         }
 
-        public int entityId
+        public EcsEntity entity
         {
             get;
             private set;
@@ -27,18 +27,18 @@ namespace Odyssey
 
         public EntityBuilder SetWorld(EcsWorld world)
         {
-            world = world;
+            this.world = world;
             return this;
         }
         public EntityBuilder CreateEntity()
         {
-            return CreateEntity(out int _);
+            return CreateEntity(out EcsEntity _);
         }
 
-        public EntityBuilder CreateEntity(out int outEntity)
+        public EntityBuilder CreateEntity(out EcsEntity outEntity)
         {
-            entityId = world.CreateEntity();
-            outEntity = entityId;
+            entity = world.CreateEntity();
+            outEntity = entity;
             return this;
         }
 
@@ -49,13 +49,13 @@ namespace Odyssey
 
         public EntityBuilder AddComponent<T>(out T component) where T : class, new()
         {
-            component = world.AddComponent<T>(entityId);
+            component = world.AddComponent<T>(entity);
             return this;
         }
 
         public EntityBuilder ClearEntity()
         {
-            entityId = 0;
+            entity = 0;
             return this;
         }
     }

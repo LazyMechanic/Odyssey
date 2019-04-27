@@ -7,13 +7,13 @@ namespace Odyssey {
         // Auto-injected fields.
         EcsWorld _world = null;
 
-        private EcsFilter<RigidbodyComponent, AntiGravityComponent> _objectFilter;
+        private EcsFilter<RigidbodyComponent, AntiGravityComponent> _filter;
 
         void IEcsRunSystem.Run()
         {
-            foreach (var i in _objectFilter)
+            foreach (var i in _filter)
             {
-                _objectFilter.Components1[i].rigidbody.AddForce(_objectFilter.Components2[i].force, ForceMode.Force);
+                _filter.Components1[i].rigidbody.AddForce(_filter.Components2[i].force, ForceMode.Force);
             }
         }
     }

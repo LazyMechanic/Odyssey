@@ -12,15 +12,6 @@ namespace Odyssey {
         
         void IEcsInitSystem.Initialize ()
         {
-            var playerGameObject = GameObject.FindObjectOfType<PlayerBehaviour>();
-            Assert.IsNotNull(playerGameObject, "Player game object not found. It must contain PlayerBehaviour script");
-
-            EntityBuilder.Instance(_world)
-                         .CreateEntity()
-                         .AddComponent<PlayerTagComponent>()
-                         .AddComponent<TransformComponent>(out TransformComponent transform);
-
-            transform.transform = playerGameObject.transform;
         }
 
         void IEcsInitSystem.Destroy()

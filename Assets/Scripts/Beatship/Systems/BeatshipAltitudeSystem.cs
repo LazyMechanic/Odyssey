@@ -10,6 +10,7 @@ namespace Odyssey {
 
         private EcsFilter<AxisComponent> _axisFilter = null;
         private EcsFilter<BeatshipTagComponent, PidValueComponent, TransformComponent, BeatshipAltitudeComponent> _beatshipFilter = null;
+
         void IEcsRunSystem.Run ()
         {
             float currentAltitude = GetDistance(_beatshipFilter.Components3[0].transform.position,

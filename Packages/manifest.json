@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git#7e65a2a8a2982e84ee40bd19847f72beb3a32533",
+    "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git#8626883db1215b3b1e8e7d6238cb441360e4c261",
     "com.leopotam.ecs-ui": "https://github.com/Leopotam/ecs-ui.git#85573ce4a539d12160f325c450a294a5d94ae048",
-    "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git#73583428dfd46423371de700a5fa09712462f245",
+    "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git#2b6f42f65a4d050aa46a2eebab7435bc9d5cedf4",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.3.2",
     "com.unity.collab-proxy": "1.2.16",
@@ -45,16 +45,16 @@
   },
   "lock": {
     "com.leopotam.ecs": {
-      "hash": "7e65a2a8a2982e84ee40bd19847f72beb3a32533",
-      "revision": "7e65a2a8a2982e84ee40bd19847f72beb3a32533"
+      "hash": "8626883db1215b3b1e8e7d6238cb441360e4c261",
+      "revision": "8626883db1215b3b1e8e7d6238cb441360e4c261"
     },
     "com.leopotam.ecs-ui": {
       "hash": "85573ce4a539d12160f325c450a294a5d94ae048",
       "revision": "85573ce4a539d12160f325c450a294a5d94ae048"
     },
     "com.leopotam.ecs-unityintegration": {
-      "hash": "73583428dfd46423371de700a5fa09712462f245",
-      "revision": "73583428dfd46423371de700a5fa09712462f245"
+      "hash": "2b6f42f65a4d050aa46a2eebab7435bc9d5cedf4",
+      "revision": "2b6f42f65a4d050aa46a2eebab7435bc9d5cedf4"
     }
   }
 }
