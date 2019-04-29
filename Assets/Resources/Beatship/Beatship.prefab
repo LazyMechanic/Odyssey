@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5347771039497501866}
   - component: {fileID: 5294226517375830611}
   - component: {fileID: 7011756187388381019}
+  - component: {fileID: 2645007879720824896}
   m_Layer: 0
   m_Name: Beatship
   m_TagString: Untagged
@@ -108,3 +109,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2645007879720824896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321799862108014977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4e83474dd0fe9b48957f58d6f1b183e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 0

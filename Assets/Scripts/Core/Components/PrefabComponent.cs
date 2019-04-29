@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Odyssey
 {
-    sealed class PrefabComponent
+    sealed class PrefabComponent : IEcsAutoResetComponent
     {
-        public GameObject gameObject;
+        public GameObject prefab;
+
+        public void Reset()
+        {
+            prefab = null;
+        }
     }
 }

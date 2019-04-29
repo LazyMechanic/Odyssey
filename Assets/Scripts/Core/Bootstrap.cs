@@ -25,10 +25,9 @@ namespace Odyssey
 
             _updateSystems
                 .Add(new AxisSystem())
-                .Add(new BarrierAreaForwardSpawnSystem())
-                .Add(new BarrierAreaSideSpawnSystem())
                 .Add(new BarrierAreaSpawnSystem())
                 .Add(new BarrierPatternGenerateSystem())
+                .Add(new BarrierAreaDestroySystem())
                 .Initialize();
 
             _fixedUpdateSystems
@@ -47,7 +46,7 @@ namespace Odyssey
                 .Add(new BeatshipSpawnInitSystem())
                 .Add(new BeatshipInitSystem())
                 .Add(new PlayerInitSystem())
-                .Add(new BarrierAreaContainerInitSystem())
+                .Add(new BarrierAreaMapInitSystem())
                 .Initialize();
         }
 

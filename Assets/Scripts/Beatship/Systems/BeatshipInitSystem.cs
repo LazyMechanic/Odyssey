@@ -14,23 +14,23 @@ namespace Odyssey {
         
         void IEcsInitSystem.Initialize ()
         {
-            var beatshipPrefab = GetBeatshipPrefab();
-            var beatshipInstance = InstantiateBeatship(beatshipPrefab);
+            GameObject beatshipPrefab = GetBeatshipPrefab();
+            GameObject beatshipInstance = InstantiateBeatship(beatshipPrefab);
 
             CreateBeatshipEntity(beatshipInstance);
         }
 
         GameObject GetBeatshipPrefab()
         {
-            var beatshipPrefab = Resources.Load<GameObject>("Beatship/Beatship");
-            Assert.IsNotNull(beatshipPrefab, "Not found beatship prefab in resources");
+            GameObject beatshipPrefab = Resources.Load<GameObject>("Beatship/Beatship");
+            Assert.IsNotNull(beatshipPrefab, "Beatship prefab in resources not found ");
 
             return beatshipPrefab;
         }
 
         GameObject InstantiateBeatship(GameObject prefab)
         {
-            var beatshipInstance = GameObject.Instantiate(prefab, _beatshipSpawnFilter.Components2[0].transform.position, Quaternion.identity);
+            GameObject beatshipInstance = GameObject.Instantiate(prefab, _beatshipSpawnFilter.Components2[0].transform.position, Quaternion.identity);
             beatshipInstance.name = "Beatship";
 
             return beatshipInstance;
@@ -51,6 +51,7 @@ namespace Odyssey {
                          .AddComponent<SpeedComponent>();
 
             transform.transform = beatshipInstance.transform;
+
             rigidbody.rigidbody = beatshipInstance.GetComponent<Rigidbody>();
             Assert.IsNotNull(rigidbody.rigidbody, "Beatship rigidbody not found");
 
@@ -61,6 +62,11 @@ namespace Odyssey {
             altitude.defaultAltitude = 4.0f;
 
             viewRadius.viewRadius = 250.0f;
+
+            BeatshipBehaviour beatshipBehaviour = beatshipInstance.GetComponent<BeatshipBehaviour>();
+            Assert.IsNotNull(beatshipBehaviour, "Beatship behaviour script on beatship prefab not found");
+
+            beatshipBehaviour.viewRadius = viewRadius.viewRadius;
         }
 
         void IEcsInitSystem.Destroy()
