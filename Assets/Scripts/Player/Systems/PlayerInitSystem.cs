@@ -12,6 +12,15 @@ namespace Odyssey {
         
         void IEcsInitSystem.Initialize ()
         {
+            var playerBehaviour = GameObject.FindObjectOfType<PlayerBehaviour>();
+            Assert.IsNotNull(playerBehaviour, "Player not found. Object must contains PlayerBehavior component");
+
+            EntityBuilder.Instance(_world)
+                         .CreateEntity()
+                         .AddComponent<TransformComponent>(out TransformComponent transformComponent)
+                         .AddComponent<PlayerTagComponent>();
+
+            transformComponent.transform = playerBehaviour.transform;
         }
 
         void IEcsInitSystem.Destroy()

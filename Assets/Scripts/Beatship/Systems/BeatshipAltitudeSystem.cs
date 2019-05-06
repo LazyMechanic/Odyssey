@@ -13,14 +13,29 @@ namespace Odyssey {
 
         void IEcsRunSystem.Run ()
         {
-            float currentAltitude = GetDistance(_beatshipFilter.Components3[0].transform.position,
-                                                -_beatshipFilter.Components3[0].transform.up);
-            float targetAltitude = _beatshipFilter.Components4[0].defaultAltitude +
-                                   _beatshipFilter.Components4[0].defaultAltitude * 0.5f *
-                                   _axisFilter.Components1[0].vertical;
+            if (!_beatshipFilter.IsEmpty())
+            {
+                float currentAltitude = GetDistance(_beatshipFilter.Components3[0].transform.position,
+                                                    -_beatshipFilter.Components3[0].transform.up);
 
-            _beatshipFilter.Components2[0].current = currentAltitude;
-            _beatshipFilter.Components2[0].target = targetAltitude;
+                float inputAxis = _axisFilter.Components1[0].vertical;
+                float defaultAltitude = _beatshipFilter.Components4[0].defaultAltitude;
+                float maxAltitude = _beatshipFilter.Components4[0].maxAltitude;
+                float minAltitude = _beatshipFilter.Components4[0].minAltitude;
+
+                float targetAltitude = defaultAltitude;
+                if (inputAxis >= 0.0f)
+                {
+                    targetAltitude = defaultAltitude + (maxAltitude - defaultAltitude) * inputAxis;
+                }
+                else
+                {
+                    targetAltitude = defaultAltitude - (minAltitude - defaultAltitude) * inputAxis;
+                }
+
+                _beatshipFilter.Components2[0].current = currentAltitude;
+                _beatshipFilter.Components2[0].target = targetAltitude;
+            }
         }
 
         private float GetDistance(Vector3 position, Vector3 direction)

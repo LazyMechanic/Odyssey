@@ -20,8 +20,8 @@ namespace Odyssey {
         private void ComputePid(int index)
         {
             float pidError = ComputePidError(index);
-            float derivative = (pidError - _pidFilter.Components1[index].lastError) / Time.deltaTime;
-            _pidFilter.Components1[index].integral += pidError * Time.deltaTime;
+            float derivative = (pidError - _pidFilter.Components1[index].lastError) / Time.fixedDeltaTime;
+            _pidFilter.Components1[index].integral += pidError * Time.fixedDeltaTime;
             _pidFilter.Components1[index].lastError = pidError;
 
             _pidFilter.Components1[index].value =

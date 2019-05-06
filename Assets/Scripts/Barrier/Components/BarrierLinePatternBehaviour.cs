@@ -7,6 +7,7 @@ namespace Odyssey {
         public BarrierPatternFillType fillType = BarrierPatternFillType.Random;
         [Range(0.0f, 1.0f)]
         public float density = 0.5f;
+        public GameObject barrierPrefab = null;
 
 #if DEBUG || UNITY_EDITOR
         void OnDrawGizmos()

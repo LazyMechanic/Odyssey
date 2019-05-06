@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
 using Leopotam.Ecs;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Odyssey {
     [EcsInject]
@@ -8,38 +10,44 @@ namespace Odyssey {
         // Auto-injected fields.
         EcsWorld _world = null;
 
+        private EcsFilter<BarrierAreaDestroyEvent> _destroyEventFilter = null;
         private EcsFilter<BarrierAreaMapComponent> _barrierAreaMapFilter = null;
-        private EcsFilter<BeatshipTagComponent, TransformComponent, BeatshipViewRadiusComponent> _beatshipFilter = null;
 
         void IEcsRunSystem.Run ()
         {
             var map = _barrierAreaMapFilter.Components1[0].map;
-            var rowsToDelete = map.Where(row =>
+            foreach (var i in _destroyEventFilter)
             {
-                EcsEntity entity = row.First.Value;
+                EcsEntity barrierAreaEntity = _destroyEventFilter.Components1[i].barrierAreaEntity;
 
-                TransformComponent barrierAreaTransformComponent = _world.GetComponent<TransformComponent>(entity);
-                SizeComponent barrierAreaSizeComponent = _world.GetComponent<SizeComponent>(entity);
-
-                Bounds barrierAreaBounds = new Bounds(barrierAreaTransformComponent.transform.position, barrierAreaSizeComponent.size);
-
-                float bottomBorderZ = _beatshipFilter.Components2[0].transform.position.z -
-                                      _beatshipFilter.Components3[0].viewRadius;
-
-                return barrierAreaBounds.max.z < bottomBorderZ;
-            }).ToList();
-
-            foreach (var row in rowsToDelete)
-            {
-                foreach (var barrierAreaEntity in row)
+                bool isRemoveRowSuccess = false;
+                foreach (var row in map)
                 {
-                    Transform transform = _world.GetComponent<TransformComponent>(barrierAreaEntity).transform;
-                    GameObject.Destroy(transform.gameObject);
+                    if (row.Remove(barrierAreaEntity))
+                    {
+                        isRemoveRowSuccess = true;
 
-                    _world.RemoveEntity(barrierAreaEntity);
+                        // If row is empty
+                        if (row.Count == 0)
+                        {
+                            // Remove row from map
+                            map.Remove(row);
+                        }
+
+                        break;
+                    }
                 }
 
-                map.Remove(row);
+                Assert.IsTrue(isRemoveRowSuccess, "Barrier area entity not found in map");
+
+                GameObject barrierAreaInstance =
+                    _world.GetComponent<TransformComponent>(barrierAreaEntity).transform.gameObject;
+
+                // Destroy game object instance
+                GameObject.Destroy(barrierAreaInstance);
+
+                // Remove entity
+                _world.RemoveEntity(barrierAreaEntity);
             }
         }
     }

@@ -17,6 +17,10 @@ namespace Odyssey {
 
             foreach (var i in _axisFilter)
             {
+                _axisFilter.Components1[i].lastHorizontal = _axisFilter.Components1[i].horizontal;
+                _axisFilter.Components1[i].lastVertical = _axisFilter.Components1[i].vertical;
+                _axisFilter.Components1[i].lastThrust = _axisFilter.Components1[i].thrust;
+
                 _axisFilter.Components1[i].horizontal = horizontal;
                 _axisFilter.Components1[i].vertical = vertical;
                 _axisFilter.Components1[i].thrust = thrust;
