@@ -369,10 +369,13 @@
     <Compile Include="Assets\Scripts\Barrier\Systems\BarrierAreaMapResetSystem.cs" />
     <Compile Include="Assets\Scripts\Barrier\Systems\BarrierAreaSpawnSystem.cs" />
     <Compile Include="Assets\Scripts\Barrier\Systems\BarrierPatternGenerateSystem.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Components\BeatshipAddDamageEvent.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipAltitudeComponent.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipBehaviour.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipFreeFlyRadiusComponent.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipHealthComponent.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Components\BeatshipLastVelocityComponent.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Components\BeatshipMaxCollisionAngleComponent.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipModelTransform.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipRotationComponent.cs" />
     <Compile Include="Assets\Scripts\Beatship\Components\BeatshipSpawnerBehaviour.cs" />
@@ -383,7 +386,10 @@
     <Compile Include="Assets\Scripts\Beatship\Components\RollRotationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipAltitudeSystem.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipCollisionSystem.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipDamageSystem.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipHealthSystem.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipInitSystem.cs" />
+    <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipLastVelocityUpdateSystem.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipMovementSystem.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipPositionRecoverySystem.cs" />
     <Compile Include="Assets\Scripts\Beatship\Systems\BeatshipRotationSystem.cs" />

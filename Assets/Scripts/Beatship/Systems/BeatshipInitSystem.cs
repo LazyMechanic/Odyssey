@@ -45,6 +45,7 @@ namespace Odyssey {
         {
             EntityBuilder.Instance(_world)
                          .CreateEntity()
+                         .AddComponent<BeatshipMaxCollisionAngleComponent>(out BeatshipMaxCollisionAngleComponent maxCollisionAngle)
                          .AddComponent<BeatshipViewRadiusComponent>(out BeatshipViewRadiusComponent viewRadius)
                          .AddComponent<BeatshipAltitudeComponent>(out BeatshipAltitudeComponent altitude)
                          .AddComponent<BeatshipRotationComponent>(out BeatshipRotationComponent rotation)
@@ -54,10 +55,13 @@ namespace Odyssey {
                          .AddComponent<TransformComponent>(out TransformComponent transform)
                          .AddComponent<RigidbodyComponent>(out RigidbodyComponent rigidbody)
                          .AddComponent<PidComponent>(out PidComponent pid)
+                         .AddComponent<BeatshipLastVelocityComponent>()
                          .AddComponent<BeatshipTagComponent>()
                          .AddComponent<AntiGravityComponent>()
                          .AddComponent<PidValueComponent>()
                          .AddComponent<SpeedComponent>();
+
+            maxCollisionAngle.maxCollisionAngle = 40.0f;
 
             transform.transform = beatshipInstance.transform;
 
@@ -72,7 +76,6 @@ namespace Odyssey {
             collision.collisionsOnStay = collisionBehaviour.collisionsOnStay;
 
             health.health = 100.0f;
-            health.maxCollisionAngle = 40.0f;
 
             pid.kp = 10.0f;
             pid.ki = 0.0f;

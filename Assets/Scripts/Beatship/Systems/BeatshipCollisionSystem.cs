@@ -7,8 +7,8 @@ namespace Odyssey {
         // Auto-injected fields.
         EcsWorld _world = null;
 
-        private EcsFilter<BeatshipTagComponent, CollisionComponent, RigidbodyComponent, BeatshipHealthComponent> _beatshipFilter = null;
-        
+        private EcsFilter<BeatshipTagComponent, CollisionComponent, BeatshipLastVelocityComponent, BeatshipMaxCollisionAngleComponent> _beatshipFilter = null;
+
         void IEcsRunSystem.Run ()
         {
             ProcessCollisionEnter();
@@ -20,33 +20,32 @@ namespace Odyssey {
         {
             foreach (var collision in _beatshipFilter.Components2[0].collisionsOnEnter)
             {
-                Vector3 collisionNormal = collision.contacts[0].normal;
-                Vector3 rigidbodyVelocity = _beatshipFilter.Components3[0].rigidbody.velocity;
+                Vector3 collisionNormal = collision.collision.contacts[0].normal;
+                Vector3 velocityOnCollision = _beatshipFilter.Components3[0].lastVelocity;
 
-                float collisionAngle = Vector3.Angle(rigidbodyVelocity, -collisionNormal);
+                float collisionAngle = Vector3.Angle(velocityOnCollision, -collisionNormal);
 
-                var barrierDamageBehaviour = collision.gameObject.GetComponent<BarrierDamageBehaviour>();
+                var barrierDamageBehaviour = collision.collision.gameObject.GetComponent<BarrierDamageBehaviour>();
                 if (barrierDamageBehaviour != null)
                 {
                     float maxCollisionAngle = _beatshipFilter.Components4[0].maxCollisionAngle;
                     if (collisionAngle < maxCollisionAngle)
                     {
-                        float damageCoefficient = 1.0f - collisionAngle / maxCollisionAngle;
-                        float damage = barrierDamageBehaviour.damage;
-                        _beatshipFilter.Components4[0].health -= damage * damageCoefficient;
 
                         EntityBuilder.Instance(_world)
                                      .CreateEntity()
                                      .AddComponent<DelayDestroyObjectEvent>(
                                          out DelayDestroyObjectEvent destroyObjectEvent);
 
-                        destroyObjectEvent.gameObject = collision.gameObject;
+                        destroyObjectEvent.gameObject = collision.collision.gameObject;
 
-                        if (_beatshipFilter.Components4[0].health <= 0.0f)
-                        {
+                        EntityBuilder.Instance(_world)
+                                     .CreateEntity()
+                                     .AddComponent<BeatshipAddDamageEvent>(out BeatshipAddDamageEvent damageEvent);
 
-                            // TODO
-                        }
+                        float damageCoefficient = 1.0f - collisionAngle / maxCollisionAngle;
+                        float damage = barrierDamageBehaviour.damage;
+                        damageEvent.damage = damage * damageCoefficient;
                     }
                 }
             }

@@ -62,12 +62,12 @@ namespace Odyssey
                 .Add(new GameStateSystem())
                 .Add(new GameLevelSystem())
                 .Add(new ChangeLevelSystem())
-                .Add(new BarrierAreaMapResetSystem())
                 .Inject(_gameConfig)
                 .Initialize();
 
             _inGameUpdateSystems
                 .Add(axisSystem)
+                .Add(new BarrierAreaMapResetSystem())
                 .Add(new LevelGenerateSystem())
                 .Add(new LevelClearSystem())
                 .Add(new BarrierAreaSpawnSystem())
@@ -88,6 +88,7 @@ namespace Odyssey
                 .Add(new BeatshipMovementSystem())
                 .Add(new BeatshipPositionRecoverySystem())
                 .Add(new BeatshipCollisionSystem())
+                .Add(new BeatshipLastVelocityUpdateSystem())
                 .Inject(_gameConfig)
                 .Initialize();
 

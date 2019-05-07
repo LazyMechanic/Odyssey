@@ -5,9 +5,9 @@ using UnityEngine;
 namespace Odyssey {
     sealed class CollisionComponent : IEcsAutoResetComponent
     {
-        public List<Collision> collisionsOnEnter;
-        public List<Collision> collisionsOnExit;
-        public List<Collision> collisionsOnStay;
+        public List<CollisionState> collisionsOnEnter;
+        public List<CollisionState> collisionsOnExit;
+        public List<CollisionState> collisionsOnStay;
         public Collider collider;
 
         public void Reset()
