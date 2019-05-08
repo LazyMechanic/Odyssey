@@ -30,6 +30,7 @@ namespace Odyssey {
 
             GameObject barrierAreaInstance = InstantiateBarrierArea(barrierAreaPrefab, position, parent);
             EcsEntity barrierAreaEntity = CreateBarrierAreaEntity(barrierAreaInstance, barrierAreaPrefab);
+            CreateStaticBarrierEntities(barrierAreaInstance);
             GeneratePatterns(barrierAreaInstance);
             AddBarrierAreaToRow(barrierAreaEntity, row, insertPosition);
         }
@@ -43,6 +44,11 @@ namespace Odyssey {
             go.transform.position = position;
 
             return go;
+        }
+
+        void CreateStaticBarrierEntities(GameObject barrierAreaInstance)
+        {
+            // TODO: add to BarrierBehaviour Renderer component and delete MaterialPropertyBlockComponent
         }
 
         EcsEntity CreateBarrierAreaEntity(GameObject barrierAreaInstance, GameObject barrierAreaPrefab)

@@ -25,26 +25,28 @@ namespace Odyssey {
 
                 float collisionAngle = Vector3.Angle(velocityOnCollision, -collisionNormal);
 
-                var barrierDamageBehaviour = collision.collision.gameObject.GetComponent<BarrierDamageBehaviour>();
-                if (barrierDamageBehaviour != null)
+                var barrierBehaviour = collision.collision.gameObject.GetComponent<BarrierBehaviour>();
+                if (barrierBehaviour != null)
                 {
                     float maxCollisionAngle = _beatshipFilter.Components4[0].maxCollisionAngle;
                     if (collisionAngle < maxCollisionAngle)
                     {
+                        if (barrierBehaviour.isDestroyable)
+                        {
+                            EntityBuilder.Instance(_world)
+                                         .CreateEntity()
+                                         .AddComponent<DelayDestroyObjectEvent>(
+                                             out DelayDestroyObjectEvent destroyObjectEvent);
 
-                        EntityBuilder.Instance(_world)
-                                     .CreateEntity()
-                                     .AddComponent<DelayDestroyObjectEvent>(
-                                         out DelayDestroyObjectEvent destroyObjectEvent);
-
-                        destroyObjectEvent.gameObject = collision.collision.gameObject;
+                            destroyObjectEvent.gameObject = collision.collision.gameObject;
+                        }
 
                         EntityBuilder.Instance(_world)
                                      .CreateEntity()
                                      .AddComponent<BeatshipAddDamageEvent>(out BeatshipAddDamageEvent damageEvent);
 
                         float damageCoefficient = 1.0f - collisionAngle / maxCollisionAngle;
-                        float damage = barrierDamageBehaviour.damage;
+                        float damage = barrierBehaviour.damage;
                         damageEvent.damage = damage * damageCoefficient;
                     }
                 }

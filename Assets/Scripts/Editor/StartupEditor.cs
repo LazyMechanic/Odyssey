@@ -25,6 +25,13 @@ namespace Odyssey
             }
 
             GUILayout.EndHorizontal();
+
+            if (GUILayout.Button("Reset map"))
+            {
+                EntityBuilder.Instance(startup.GetWorld())
+                             .CreateEntity()
+                             .AddComponent<BarrierAreaMapResetEvent>();
+            }
         }
     }
 }

@@ -67,9 +67,9 @@ namespace Odyssey
 
             _inGameUpdateSystems
                 .Add(axisSystem)
-                .Add(new BarrierAreaMapResetSystem())
                 .Add(new LevelGenerateSystem())
                 .Add(new LevelClearSystem())
+                .Add(new BarrierAreaMapResetSystem())
                 .Add(new BarrierAreaSpawnSystem())
                 .Add(new BarrierPatternGenerateSystem())
                 .Add(new BarrierAreaDestroySystem())
@@ -204,6 +204,11 @@ namespace Odyssey
                          .AddComponent<ChangeGameLevelEvent>(out ChangeGameLevelEvent changeGameLevelEvent);
 
             changeGameLevelEvent.gameLevel = level;
+        }
+
+        public EcsWorld GetWorld()
+        {
+            return _world;
         }
     }
 }
