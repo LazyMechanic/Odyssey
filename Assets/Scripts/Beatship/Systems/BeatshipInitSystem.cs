@@ -46,11 +46,11 @@ namespace Odyssey {
             EntityBuilder.Instance(_world)
                          .CreateEntity()
                          .AddComponent<BeatshipMaxCollisionAngleComponent>(out BeatshipMaxCollisionAngleComponent maxCollisionAngle)
-                         .AddComponent<BeatshipViewRadiusComponent>(out BeatshipViewRadiusComponent viewRadius)
                          .AddComponent<BeatshipAltitudeComponent>(out BeatshipAltitudeComponent altitude)
                          .AddComponent<BeatshipRotationComponent>(out BeatshipRotationComponent rotation)
                          .AddComponent<BeatshipModelTransform>(out BeatshipModelTransform modelTransform)
                          .AddComponent<BeatshipHealthComponent>(out BeatshipHealthComponent health)
+                         .AddComponent<BeatshipViewComponent>(out BeatshipViewComponent view)
                          .AddComponent<CollisionComponent>(out CollisionComponent collision)
                          .AddComponent<TransformComponent>(out TransformComponent transform)
                          .AddComponent<RigidbodyComponent>(out RigidbodyComponent rigidbody)
@@ -99,7 +99,8 @@ namespace Odyssey {
             BeatshipBehaviour beatshipBehaviour = beatshipInstance.GetComponent<BeatshipBehaviour>();
             Assert.IsNotNull(beatshipBehaviour, "Beatship behaviour script on beatship prefab not found");
 
-            viewRadius.viewRadius = beatshipBehaviour.viewRadius;
+            view.viewOpacityCurve = beatshipBehaviour.viewOpacityCurve;
+            view.viewRadius = beatshipBehaviour.viewRadius;
 
             rotation.pitchCurve = beatshipBehaviour.pitchCurve;
             rotation.rollLimit = beatshipBehaviour.rollLimit;

@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Odyssey {
     sealed class BeatshipBehaviour : MonoBehaviour
     {
+        public AnimationCurve viewOpacityCurve;
         public AnimationCurve pitchCurve;
         public float viewRadius;
         public float rollLimit;

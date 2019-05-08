@@ -30,7 +30,7 @@ namespace Odyssey {
 
             GameObject barrierAreaInstance = InstantiateBarrierArea(barrierAreaPrefab, position, parent);
             EcsEntity barrierAreaEntity = CreateBarrierAreaEntity(barrierAreaInstance, barrierAreaPrefab);
-            CreateStaticBarrierEntities(barrierAreaInstance);
+            CreateBarrierEntities(barrierAreaEntity);
             GeneratePatterns(barrierAreaInstance);
             AddBarrierAreaToRow(barrierAreaEntity, row, insertPosition);
         }
@@ -46,19 +46,17 @@ namespace Odyssey {
             return go;
         }
 
-        void CreateStaticBarrierEntities(GameObject barrierAreaInstance)
-        {
-            // TODO: add to BarrierBehaviour Renderer component and delete MaterialPropertyBlockComponent
-        }
-
         EcsEntity CreateBarrierAreaEntity(GameObject barrierAreaInstance, GameObject barrierAreaPrefab)
         {
             EntityBuilder.Instance(_world)
                          .CreateEntity(out EcsEntity entity)
-                         .AddComponent<BarrierAreaTagComponent>()
+                         .AddComponent<BarrierListComponent>(out BarrierListComponent barrierList)
                          .AddComponent<TransformComponent>(out TransformComponent transform)
+                         .AddComponent<PrefabComponent>(out PrefabComponent prefab)
                          .AddComponent<SizeComponent>(out SizeComponent size)
-                         .AddComponent<PrefabComponent>(out PrefabComponent prefab);
+                         .AddComponent<BarrierAreaTagComponent>();
+
+            barrierList.barriers = new List<BarrierBehaviour>();
 
             transform.transform = barrierAreaInstance.transform;
 
@@ -70,6 +68,15 @@ namespace Odyssey {
             prefab.prefab = barrierAreaPrefab;
 
             return entity;
+        }
+
+        void CreateBarrierEntities(EcsEntity barrierAreaEntity)
+        {
+            EntityBuilder.Instance(_world)
+                         .CreateEntity()
+                         .AddComponent<BarrierEntityCreateEvent>(out BarrierEntityCreateEvent createEvent);
+
+            createEvent.parentBarrierAreaEntity = barrierAreaEntity;
         }
 
         void GeneratePatterns(GameObject barrierAreaInstance)
@@ -95,7 +102,7 @@ namespace Odyssey {
                          .AddComponent<BarrierRectPatternGenerateEvent>(out BarrierRectPatternGenerateEvent generateEvent);
 
             generateEvent.barrierPrefab = barrierRectPatternBehaviour.barrierPrefab;
-            generateEvent.patternGameObject = barrierRectPatternBehaviour.gameObject;
+            generateEvent.parent = barrierRectPatternBehaviour.transform;
             generateEvent.size = barrierRectPatternBehaviour.size;
             generateEvent.density = barrierRectPatternBehaviour.density;
             generateEvent.fillType = barrierRectPatternBehaviour.fillType;
@@ -118,7 +125,7 @@ namespace Odyssey {
                          .AddComponent<BarrierLinePatternGenerateEvent>(out BarrierLinePatternGenerateEvent generateEvent);
 
             generateEvent.barrierPrefab = barrierLinePatternBehaviour.barrierPrefab;
-            generateEvent.patternGameObject = barrierLinePatternBehaviour.gameObject;
+            generateEvent.parent = barrierLinePatternBehaviour.transform;
             generateEvent.size = barrierLinePatternBehaviour.size;
             generateEvent.density = barrierLinePatternBehaviour.density;
             generateEvent.fillType = barrierLinePatternBehaviour.fillType;

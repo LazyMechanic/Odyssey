@@ -3,15 +3,8 @@ using UnityEngine;
 
 namespace Odyssey {
     [EcsOneFrame]
-    sealed class BarrierEntityCreateEvent : IEcsAutoResetComponent
+    sealed class BarrierEntityCreateEvent
     {
-        public Transform transform;
-        public MaterialPropertyBlock materialPropertyBlock;
-
-        public void Reset()
-        {
-            transform = null;
-            materialPropertyBlock = null;
-        }
+        public EcsEntity parentBarrierAreaEntity;
     }
 }

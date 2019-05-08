@@ -72,6 +72,8 @@ namespace Odyssey
                 .Add(new BarrierAreaMapResetSystem())
                 .Add(new BarrierAreaSpawnSystem())
                 .Add(new BarrierPatternGenerateSystem())
+                .Add(new BarrierEntityCreateSystem())
+                .Add(new BarrierOpacitySystem())
                 .Add(new BarrierAreaDestroySystem())
                 .Add(new BeatshipRotationSystem())
                 .Add(attachSystem)

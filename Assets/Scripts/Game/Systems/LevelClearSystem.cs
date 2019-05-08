@@ -10,7 +10,7 @@ namespace Odyssey {
         EcsWorld _world = null;
 
         private EcsFilter<BarrierAreaMapComponent> _barrierAreaMapFilter = null;
-        private EcsFilter<BeatshipTagComponent, TransformComponent, BeatshipViewRadiusComponent> _beatshipFilter = null;
+        private EcsFilter<BeatshipTagComponent, TransformComponent, BeatshipViewComponent> _beatshipFilter = null;
 
         void IEcsRunSystem.Run () {
             var map = _barrierAreaMapFilter.Components1[0].map;

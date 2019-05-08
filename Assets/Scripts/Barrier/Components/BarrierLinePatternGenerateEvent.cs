@@ -9,12 +9,12 @@ namespace Odyssey {
         public float density;
         public BarrierPatternFillType fillType;
         public GameObject barrierPrefab;
-        public GameObject patternGameObject;
+        public Transform parent;
 
         public void Reset()
         {
             barrierPrefab = null;
-            patternGameObject = null;
+            parent = null;
         }
     }
 }

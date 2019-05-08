@@ -45,7 +45,7 @@ namespace Odyssey {
                 Vector3 scale = Vector3.one * Random.Range(0.5f, 2.0f);
 
                 var go = GameObject.Instantiate(generateEvent.barrierPrefab,
-                                                generateEvent.patternGameObject.transform);
+                                                generateEvent.parent);
 
                 go.name = generateEvent.barrierPrefab.name;
 
@@ -74,7 +74,7 @@ namespace Odyssey {
                 Vector3 position = new Vector3(0, 0, (i + 1) * (generateEvent.size / (numberOfBarriers + 1)) - generateEvent.size / 2);
 
                 var go = GameObject.Instantiate(generateEvent.barrierPrefab,
-                                                generateEvent.patternGameObject.transform);
+                                                generateEvent.parent);
                 go.name = generateEvent.barrierPrefab.name;
 
                 go.transform.localPosition = position;
@@ -101,7 +101,7 @@ namespace Odyssey {
                 Vector3 scale = Vector3.one * Random.Range(0.5f, 2.0f);
 
                 var go = GameObject.Instantiate(generateEvent.barrierPrefab,
-                                                generateEvent.patternGameObject.transform);
+                                                generateEvent.parent);
 
                 go.name = generateEvent.barrierPrefab.name;
 
@@ -133,7 +133,7 @@ namespace Odyssey {
                     Vector3 position = new Vector3((iColumn + 1) * (generateEvent.size.x / (column + 1)) - generateEvent.size.x / 2, 0, zPosition);
 
                     var go = GameObject.Instantiate(generateEvent.barrierPrefab,
-                                                    generateEvent.patternGameObject.transform);
+                                                    generateEvent.parent);
 
                     go.name = generateEvent.barrierPrefab.name;
 

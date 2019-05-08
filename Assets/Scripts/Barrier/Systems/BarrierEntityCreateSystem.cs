@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Odyssey {
     [EcsInject]
@@ -12,15 +14,19 @@ namespace Odyssey {
         {
             foreach (var i in _barrierCreateEventFilter)
             {
-                EntityBuilder.Instance(_world)
-                             .CreateEntity()
-                             .AddComponent<BarrierTagComponent>()
-                             .AddComponent<MaterialPropertyBlockComponent>(
-                                 out MaterialPropertyBlockComponent matPropertyBlock)
-                             .AddComponent<TransformComponent>(out TransformComponent transform);
+                EcsEntity barrierAreaEntity = _barrierCreateEventFilter.Components1[i].parentBarrierAreaEntity;
+                var targetBarrierList =
+                    _world.GetComponent<BarrierListComponent>(barrierAreaEntity).barriers;
 
-                matPropertyBlock.materialPropertyBlock = _barrierCreateEventFilter.Components1[i].materialPropertyBlock;
-                transform.transform = _barrierCreateEventFilter.Components1[i].transform;
+                var barrierBehaviours = _world.GetComponent<TransformComponent>(barrierAreaEntity)
+                                              .transform
+                                              .gameObject
+                                              .GetComponentsInChildren<BarrierBehaviour>();
+
+                foreach (var behaviour in barrierBehaviours)
+                {
+                    targetBarrierList.Add(behaviour);
+                }
             }
         }
     }
